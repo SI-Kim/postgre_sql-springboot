@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,5 +41,13 @@ public class PostsRepositoryTest {
         Posts posts = postsList.get(0);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
+    }
+
+    @Test
+    public void 게시글_조회하기() {
+        Long id = Long.parseLong("1");
+        String expectedTitle = "title1";
+        Optional<Posts> posts = postsRepository.findById(id);
+        assertThat(posts.get().getTitle()).isEqualTo(expectedTitle);
     }
 }
